@@ -1,0 +1,37 @@
+<div class="app-container">
+
+  @if (!auth.isLoggedIn()) {
+    <app-login></app-login>
+  }
+
+  @if (auth.isLoggedIn()) {
+    <header class="top-navbar" style="background-color: #2d4a36; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; color: white; font-family: sans-serif;">
+      <div class="logo-brand" (click)="onFormFinished()" style="cursor: pointer; font-weight: bold; font-size: 1.2rem;">
+        Book Catalog Group 4
+      </div>
+
+      <nav class="nav-links" style="display: flex; gap: 20px; align-items: center;">
+        <button (click)="onFormFinished()" style="background: none; border: none; color: white; cursor: pointer; font-size: 1rem;" [style.text-decoration]="currentView === 'list' ? 'underline' : 'none'">
+          Reading List
+        </button>
+        <button (click)="navigateToAddTask()" style="background: #4a7c59; border: none; padding: 8px 16px; border-radius: 4px; color: white; cursor: pointer; font-weight: bold;">
+          + Add New Book
+        </button>
+        <span style="opacity: 0.85; font-size: 0.9rem;">Hi, {{ auth.currentUser }}</span>
+        <button (click)="logout()" style="background: none; border: 1px solid rgba(255,255,255,0.6); padding: 6px 14px; border-radius: 4px; color: white; cursor: pointer;">
+          Logout
+        </button>
+      </nav>
+    </header>
+
+    <main class="view-viewport" style="padding: 20px;">
+      @if (currentView === 'list') {
+        <app-book-list (editRequested)="navigateToEditTask($event)"></app-book-list>
+      }
+      @if (currentView === 'form') {
+        <app-book-form [editTargetBook]="selectedBookForEdit" (formViewFinished)="onFormFinished()"></app-book-form>
+      }
+    </main>
+  }
+
+</div>

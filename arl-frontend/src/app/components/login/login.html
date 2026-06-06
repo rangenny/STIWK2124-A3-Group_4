@@ -1,0 +1,38 @@
+<div class="login-page">
+  <form class="login-card" (ngSubmit)="onSubmit()">
+    <div class="login-brand">📚 Book Catalog Group 4</div>
+    <h2 class="login-title">Sign in</h2>
+
+    <label class="login-label" for="username">Username</label>
+    <input
+      id="username"
+      name="username"
+      type="text"
+      class="login-input"
+      [(ngModel)]="username"
+      autocomplete="username"
+      placeholder="admin"
+    />
+
+    <label class="login-label" for="password">Password</label>
+    <input
+      id="password"
+      name="password"
+      type="password"
+      class="login-input"
+      [(ngModel)]="password"
+      autocomplete="current-password"
+      placeholder="••••••••"
+    />
+
+    @if (errorMessage) {
+      <p class="login-error">{{ errorMessage }}</p>
+    }
+
+    <button type="submit" class="login-button" [disabled]="loading">
+      {{ loading ? 'Signing in…' : 'Login' }}
+    </button>
+
+    <p class="login-hint">Default account — username: <b>admin</b>, password: <b>admin123</b></p>
+  </form>
+</div>

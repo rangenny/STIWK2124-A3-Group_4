@@ -1,0 +1,67 @@
+<div class="form-container">
+  <h2>{{ isEditMode ? 'Edit Book' : 'Add New Book' }}</h2>
+
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+    
+    <div class="form-group">
+      <label for="title">Book Title *</label>
+      <input id="title" type="text" formControlName="title"
+             [class.is-invalid]="f['title'].invalid && f['title'].touched">
+      
+      @if (f['title'].invalid && f['title'].touched) {
+        <div class="error-msg" style="color: #c94c4c; margin-top: 5px;">
+          @if (f['title'].errors?.['required']) {
+            <small>A book title is required.</small>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="author">Author *</label>
+      <input id="author" type="text" formControlName="author"
+             [class.is-invalid]="f['author'].invalid && f['author'].touched">
+             
+      @if (f['author'].invalid && f['author'].touched) {
+        <div class="error-msg" style="color: #c94c4c; margin-top: 5px;">
+          <small>Author name is required.</small>
+        </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="category">Category *</label>
+      <select id="category" formControlName="category" [class.is-invalid]="f['category'].invalid && f['category'].touched">
+        <option value="" disabled>Select a category</option>
+        <option value="Technology">Technology</option>
+        <option value="Fiction">Fiction</option>
+        <option value="Science">Science</option>
+      </select>
+      @if (f['category'].invalid && f['category'].touched) {
+        <div class="error-msg" style="color: #c94c4c; margin-top: 5px;">
+          <small>Please select a category.</small>
+        </div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label for="shortDesc">Short Description *</label>
+      <textarea id="shortDesc" rows="3" formControlName="shortDesc"
+                [class.is-invalid]="f['shortDesc'].invalid && f['shortDesc'].touched"></textarea>
+      @if (f['shortDesc'].invalid && f['shortDesc'].touched) {
+        <div class="error-msg" style="color: #c94c4c; margin-top: 5px;">
+          <small>Please provide a brief description.</small>
+        </div>
+      }
+    </div>
+
+    <div class="form-buttons" style="display: flex; gap: 10px; margin-top: 20px;">
+      <button type="submit" class="submit-btn" style="flex: 1; background-color: #2d4a36; color: white; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold;">
+        {{ isEditMode ? 'Save Changes' : 'Add Book' }}
+      </button>
+      <button type="button" (click)="onCancel()" style="background-color: #888; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer;">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>
