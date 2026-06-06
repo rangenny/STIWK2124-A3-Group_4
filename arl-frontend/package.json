@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "e2e": "playwright test"
   },
   "private": true,
   "packageManager": "npm@11.12.1",
@@ -24,6 +25,7 @@
     "@angular/build": "^21.2.5",
     "@angular/cli": "^21.2.5",
     "@angular/compiler-cli": "^21.2.0",
+    "@playwright/test": "^1.60.0",
     "@types/node": "^25.9.1",
     "autoprefixer": "^10.5.0",
     "concurrently": "^9.2.1",
@@ -34,4 +36,7 @@
     "typescript": "~5.9.2",
     "vitest": "^4.1.7"
   }
+
+
+
 }
