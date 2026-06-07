@@ -5,6 +5,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -15,25 +16,26 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 1, max = 255, message = "Please enter book title!")
+    @NotBlank(message = "Please enter book title!")
+    @Size(max = 255)
     private String title;
 
-    @Size(min = 1, max = 50, message = "Author Name is required!")
+    @NotBlank(message = "Author Name is required!")
+    @Size(max = 50)
     private String author;
 
-    @Size(min = 1, max = 30, message = "Category is required!")
+    @NotBlank(message = "Category is required!")
+    @Size(max = 30)
     private String category;
 
-    @Size(min = 1, max = 255, message = "Please enter short description!")
+    @NotBlank(message = "Please enter short description!")
+    @Size(max = 255)
     private String shortDesc;
 
     public Book() {
     }
 
-    public Book(Long id, @Size(min = 1, max = 255, message = "Please enter book title!") String title,
-            @Size(min = 1, max = 50, message = "Author Name is required!") String author,
-            @Size(min = 1, max = 30, message = "Category is required!") String category,
-            @Size(min = 1, max = 255, message = "Please enter short description!") String shortDesc) {
+    public Book(Long id, String title, String author, String category, String shortDesc) {
         this.id = id;
         this.title = title;
         this.author = author;

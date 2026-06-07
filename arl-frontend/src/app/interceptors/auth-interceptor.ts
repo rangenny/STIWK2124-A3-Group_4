@@ -5,8 +5,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const writeMethods = ['POST', 'PUT', 'DELETE'];
 
   if (writeMethods.includes(req.method)) {
-    // Attach Basic Auth header (Base64 encoded admin:password)
-    const authHeader = 'Basic ' + btoa('user:7548545e-4c74-427c-99d7-846399435422'); // Replace with your generated Spring password if not configured
+    // Attach Basic Auth header (Base64 encoded username:password)
+    const authHeader = 'Basic ' + btoa('admin:admin123'); // Replace with your generated Spring password if not configured
     
     const authReq = req.clone({
       setHeaders: {

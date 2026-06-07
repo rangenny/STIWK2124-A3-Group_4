@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "users")
@@ -15,11 +16,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Unique login name
+    @NotBlank(message = "Username cannot be blank")
     @Column(unique = true, nullable = false)
     private String username;
 
-    // Stores the BCrypt-hashed password (never the plain text)
+    @NotBlank(message = "Password cannot be blank")
     @Column(nullable = false)
     private String password;
 

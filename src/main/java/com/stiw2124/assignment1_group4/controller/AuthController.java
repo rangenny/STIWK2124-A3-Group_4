@@ -2,6 +2,8 @@ package com.stiw2124.assignment1_group4.controller;
 
 import com.stiw2124.assignment1_group4.model.User;
 import com.stiw2124.assignment1_group4.repository.UserRepository;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,9 +25,12 @@ public class AuthController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    // Simple request body holder for the login form
+    // Secure the DTO with validation annotations
     public static class LoginRequest {
+        @NotBlank(message = "Username cannot be blank")
         private String username;
+        
+        @NotBlank(message = "Password cannot be blank")
         private String password;
 
         public String getUsername() { return username; }
@@ -34,21 +39,18 @@ public class AuthController {
         public void setPassword(String password) { this.password = password; }
     }
 
-    // POST /api/auth/login  ->  validates username + password against the DB
+    // Trigger validation with @Valid
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
         Optional<User> found = userRepository.findByUsername(request.getUsername());
 
-        // matches() compares the plain-text input against the stored BCrypt hash
-        if (found.isPresent()
-                && passwordEncoder.matches(request.getPassword(), found.get().getPassword())) {
+        if (found.isPresent() && passwordEncoder.matches(request.getPassword(), found.get().getPassword())) {
             return ResponseEntity.ok(Map.of(
                     "success", true,
                     "username", found.get().getUsername()
             ));
         }
 
-        // Invalid username or password
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of(
                 "success", false,
                 "message", "Invalid username or password"
