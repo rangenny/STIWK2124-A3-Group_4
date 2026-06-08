@@ -15,5 +15,5 @@ CREATE TABLE IF NOT EXISTS `users` (
 --   username: admin
 --   password: admin123   (stored as a BCrypt hash, NOT plain text)
 INSERT INTO `users` (`username`, `password`)
-VALUES ('admin', '$2a$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2')
+VALUES ('admin', '$10$7JB720yubVSZvUI0rEqK/.VqGOZTH.ulu33dHOiBE8ByOhJIrdAu2')
 ON DUPLICATE KEY UPDATE `password` = VALUES(`password`);
