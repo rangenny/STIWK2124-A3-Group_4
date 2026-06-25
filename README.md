@@ -25,6 +25,15 @@ If you have **Docker Desktop** installed, you can launch the complete container 
 * **Frontend Web Interface UI** : http://localhost:80
 * **Backend** : http://localhost:8080/api/books
 
+* **Username** : admin
+* **Password** : admin123
+
+### Troubleshooting & Database Resets
+If you modify data structures, updating scripts like import.sql, or need to completely wipe the local database clean to test fresh initialization, use the volume-clear flag to shut down:
+   ```bash
+   docker-compose down -v
+```
+
 ### Shut Down Containers
 To clean up your workspace and stop all running containers safely, run:
    ```bash
@@ -51,7 +60,7 @@ Open the terminal and run:
    # For macOS / Linux Terminal
    ./mvnw spring-boot:run
    ```
-Leave this terminal window open. The backend will stay active and listen for incoming HTTP API requests on port 8080.
+Leave this terminal window open. The backend will stay active and listen for incoming HTTP API requests on port 8080 (Configured with CORS clearance for origins http://localhost and http://localhost:4200).
 
 ### 3. Boot up the Angular Frontend (Terminal 2)
 Open a brand new, separate terminal window and run:
