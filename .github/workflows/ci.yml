@@ -8,7 +8,6 @@ jobs:
   backend-tests:
     runs-on: ubuntu-latest
     
-    # Start the MySQL Service for GitHub Actions
     services:
       mysql:
         image: mysql:8.0
@@ -23,13 +22,13 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Set up JDK
+    # FIX 1: Upgraded to Java 25
+    - name: Set up JDK 25
       uses: actions/setup-java@v4
       with:
-        java-version: '21' 
-        distribution: 'temurin'
+        java-version: '25' 
+        distribution: 'oracle'
 
-    # Run Backend Tests, overriding the database URL for the CI environment
     - name: Run Backend Tests & Build
       run: mvn clean test package
       env:
@@ -51,6 +50,11 @@ jobs:
     - name: Install Frontend Dependencies
       working-directory: ./arl-frontend
       run: npm install
+
+    # FIX 2: Installed the missing Vitest browser package before testing
+    - name: Install Playwright for Vitest
+      working-directory: ./arl-frontend
+      run: npm install -D @vitest/browser-playwright playwright
 
     - name: Run Angular Test Suite
       working-directory: ./arl-frontend
