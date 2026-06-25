@@ -1,5 +1,5 @@
 # Stage 1: Build compilation footprint
-FROM maven:3.9.6-eclipse-temurin-17 AS backend-builder
+FROM maven:3.9-eclipse-temurin-25 AS backend-builder
 WORKDIR /app
 
 # Copy dependency mappings first to cache layers efficiently
@@ -13,7 +13,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Stage 2: Clean production execution environment
-FROM eclipse-temurin:17-jre-jammy
+FROM eclipse-temurin:25-jre-jammy
 WORKDIR /app
 
 # Copy production compiled JAR from Stage 1
