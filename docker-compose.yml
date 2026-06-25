@@ -17,7 +17,7 @@ services:
     networks:
       - arl-network
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pnewpassword"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-pPhua@0809"]   # change password
       interval: 10s
       timeout: 5s
       retries: 5
@@ -34,7 +34,8 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://arl-db:3306/arl_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
       - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=newpassword
+      # change password
+      - SPRING_DATASOURCE_PASSWORD=Phua@0809
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     depends_on:
       arl-db:
