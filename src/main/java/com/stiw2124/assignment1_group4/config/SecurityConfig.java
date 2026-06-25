@@ -32,16 +32,11 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             // 3. Define authorization rules based on your security criteria
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll() // Permits authentication routes
-                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Add this right below your auth permitAll
-                .requestMatchers(HttpMethod.GET, "/api/books/**", "/api/**").permitAll() // Public read access
-                .requestMatchers(HttpMethod.POST, "/api/books/**", "/api/**").authenticated() // Secure writes
-                .requestMatchers(HttpMethod.PUT, "/api/books/**", "/api/**").authenticated()  // Secure updates
-                .requestMatchers(HttpMethod.DELETE, "/api/books/**", "/api/**").authenticated() // Secure deletes
-                .anyRequest().authenticated()
-            )
-            // 4. Implement Basic Authentication for the secure write endpoints
-            .httpBasic(Customizer.withDefaults());
+            // Permit everything under /api/ completely so your AuthController can handle it!
+            .requestMatchers("/api/auth/**", "/api/**").permitAll() 
+            .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+            .anyRequest().authenticated()
+        );
 
         return http.build();
     }
@@ -71,7 +66,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:4200")); // Allows your Angular frontend
+        configuration.setAllowedOrigins(List.of("http://localhost", "http://localhost:4200", "http://127.0.0.1")); // Allows your Angular frontend
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
         configuration.setAllowCredentials(true);

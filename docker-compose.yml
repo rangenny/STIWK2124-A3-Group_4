@@ -8,7 +8,7 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: arl_db
-      MYSQL_ROOT_PASSWORD: Phua@0809
+      MYSQL_ROOT_PASSWORD: "Phua@0809"
     ports:
       - "3306:3306"
     volumes:
@@ -33,7 +33,7 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://arl-db:3306/arl_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
       - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=Phua@0809
+      - SPRING_DATASOURCE_PASSWORD: "Phua@0809"
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - SPRING_SQL_INIT_MODE=always
       - SPRING_JPA_DEFER_DATASOURCE_INITIALIZATION=true
