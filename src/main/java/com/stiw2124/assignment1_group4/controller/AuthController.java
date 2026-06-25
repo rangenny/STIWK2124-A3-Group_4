@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost")
 public class AuthController {
 
     private final UserRepository userRepository;
@@ -42,6 +42,13 @@ public class AuthController {
     // Trigger validation with @Valid
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
+        
+        // TEMPORARY: Print the exact hash for the password being sent
+    String temporaryHash = passwordEncoder.encode(request.getPassword());
+    System.out.println("--- COPY THIS EXACT HASH FROM YOUR LOGS ---");
+    System.out.println(temporaryHash);
+    System.out.println("-------------------------------------------");
+        
         Optional<User> found = userRepository.findByUsername(request.getUsername());
 
         if (found.isPresent() && passwordEncoder.matches(request.getPassword(), found.get().getPassword())) {
