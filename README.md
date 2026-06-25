@@ -23,7 +23,7 @@ If you have **Docker Desktop** installed, you can launch the complete container 
 
 ### 2. Access the Live Services
 * **Frontend Web Interface UI** : http://localhost:80
-* **Backend** : http://localhost:8080
+* **Backend** : http://localhost:8080/api/books
 
 ### Shut Down Containers
 To clean up your workspace and stop all running containers safely, run:
