@@ -8,7 +8,8 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: arl_db
-      MYSQL_ROOT_PASSWORD: newpassword
+      MYSQL_ROOT_PASSWORD: Phua@0809
+      # modify the password, make sure same as the MySql psw
     ports:
       - "3306:3306"
     volumes:
