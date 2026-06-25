@@ -22,7 +22,7 @@ If you have **Docker Desktop** installed, you can launch the complete container 
    docker-compose up --build -d
 
 ### 2. Access the Live Services
-* **Frontend Web Interface UI** : http://localhost:4200
+* **Frontend Web Interface UI** : http://localhost:80
 * **Backend** : http://localhost:8080
 
 ### Shut Down Containers
